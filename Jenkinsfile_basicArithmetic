@@ -1,0 +1,71 @@
+pipeline
+{
+    agent any
+
+    stages
+    {
+        stage ('Pull basicArithmetic artifacts from the SCM')
+        {
+            steps
+            {
+                git 'https://github.com/AWSRJ/basicArithmeticWebapp.git'
+            }
+        }
+        stage ('Clean')
+        {
+            steps
+            {
+                // Use Pipeline Maven Integration Plugin
+                withMaven(maven: 'maven_home')
+                {
+                    sh 'mvn clean'
+                }
+            }
+        }
+        stage ('Validate')
+        {
+            steps
+            {
+                withMaven(maven: 'maven_home')
+                {
+                    sh 'mvn validate'
+                }
+            }
+        }
+        stage ('Test')
+        {
+            steps
+            {
+                withMaven(maven: 'maven_home')
+                {
+                    sh 'mvn test'
+                }
+            }
+            // It will publish the JUnit test case graph
+            post
+            {
+                always
+                {
+                    junit checksName: 'basicArithmetic_TestResult', testResults: '/home/ec2-user/javaProjects/basicArithmeticWebapp/target/surefire-reports/*.xml'
+                }
+            }
+        }
+        stage ('Package')
+        {
+            steps
+            {
+                withMaven(maven: 'maven_home')
+                {
+                    sh 'mvn package'
+                }
+            }
+            post
+            {
+                success
+                {
+                    archiveArtifacts artifacts: '/home/ec2-user/javaProjects/basicArithmeticWebapp/target/basicArithmeticWebapp.war', followSymlinks: false
+                }
+            }
+        }
+    }
+}
