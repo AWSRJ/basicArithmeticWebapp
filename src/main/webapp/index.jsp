@@ -5,7 +5,7 @@
 </header>
 <body>
 	<ul>
-		<li><a href="http://3.239.187.97:8080/basicArithmeticWebapp/jsp/calcForm.jsp" class="active">Calculator</a></li>
+		<li><a href="http://35.175.116.16:8080/basicArithmeticWebapp/jsp/calcForm.jsp" class="active">Calculator</a></li>
 	</ul>
 </body>
 </html>
