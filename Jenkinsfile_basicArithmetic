@@ -46,7 +46,9 @@ pipeline
             {
                 always
                 {
-                    junit checksName: 'basicArithmetic_TestResult', testResults: '/home/ec2-user/javaProjects/basicArithmeticWebapp/target/surefire-reports/*.xml'
+                    // Double star (**) is needed in path bcoz Jenkins pull this .xml file from
+                    // Jenkins path /var/lib/jenkins/workspace/basicArithmeticWebapp_Build/target/~
+                    junit checksName: 'basicArithmetic_TestResult', testResults: '**/target/surefire-reports/*.xml'
                 }
             }
         }
@@ -63,7 +65,7 @@ pipeline
             {
                 success
                 {
-                    archiveArtifacts artifacts: '/home/ec2-user/javaProjects/basicArithmeticWebapp/target/basicArithmeticWebapp.war', followSymlinks: false
+                    archiveArtifacts artifacts: '**/target/basicArithmeticWebapp.war', followSymlinks: false
                 }
             }
         }
