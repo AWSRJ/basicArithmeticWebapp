@@ -5,7 +5,8 @@
 </header>
 <body>
 	<ul>
-		<li><a href="http://35.175.116.16:8085/basicArithmeticWebapp/jsp/calcForm.jsp" class="active">Calculator</a></li>
+		<!-- Put Jenkins Server EC2 IP and Tomcat Server Port here -->
+		<li><a href="http://3.231.57.231:8085/basicArithmeticWebapp/jsp/calcForm.jsp" class="active">Calculator</a></li>
 	</ul>
 </body>
 </html>
